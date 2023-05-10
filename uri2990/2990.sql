@@ -47,3 +47,13 @@ INSERT INTO projetos (pnumero, pnome, dnumero)
 VALUES 
   (2010, 'Alpha', 1010),
   (2020, 'Beta', 1020);
+
+ --Select de restrição --
+ select empregados.cpf, empregados.enome, departamentos.dnome
+ from empregados
+ inner join departamentos on empregados.dnumero = departamentos.dnumero
+ where empregados.cpf not in (
+ select empregados.cpf
+ from empregados
+ inner join trabalha on trabalha.cpf_emp = empregados.cpf)
+ order by  empregados.cpf
